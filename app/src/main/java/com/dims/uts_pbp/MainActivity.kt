@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -20,26 +19,36 @@ class MainActivity : AppCompatActivity() {
             val teksDua = dua.text.toString().trim()
             val jumlah: Int? = jumlahView.text.toString().trim().toIntOrNull()//perbaikan
 
-            if (teksSatu.isEmpty() || teksDua.isEmpty()) {//perbaikan
-                Toast.makeText(
-                    this,
-                    "Please fill in all fields",
-                    Toast.LENGTH_SHORT
-                ).show()
+            //penjelasan untuk melakukan validasi jika teks tidak diisi
+            if (teksSatu.isEmpty()) {
+                satu.error = getString(R.string.error_isi_data)
+                satu.requestFocus()
                 return@setOnClickListener
             }
-            if (jumlah == null || jumlah !in 1..10) {//perbaikan
-                Toast.makeText(this, "Jumlah harus angka 1 sampai 10", Toast.LENGTH_SHORT).show()
+
+            if (teksDua.isEmpty()) {
+                dua.error = getString(R.string.error_isi_data)
+                dua.requestFocus()
+                return@setOnClickListener
+            }
+            //untuk melaakukna validasi jika jumlah tidak sesuai
+            if (jumlah == null || jumlah !in 1..10) {
+                jumlahView.error = getString(R.string.error_jumlah_range)
+                jumlahView.requestFocus()
                 return@setOnClickListener
             }
                 val tarif: Int = 75000
+                // Perkalian Int menghasilkan total biaya setelah jumlah aman dari null.
                 val total: Int = tarif * jumlah //perbaikan
-                // TODO-05: buat Explicit Intent menuju ResultActivity
-                // TODO-06: kirim teksSatu sebagai String
-                // TODO-07: kirim teksDua sebagai String
-                // TODO-08: kirim jumlah sebagai Int
-                // TODO-09: kirim total sebagai Int
-                // TODO-10: buka Activity tujuan
+            //mengiirm data lewat explisit intent
+            val intent = Intent(this, ResultActivity::class.java).apply {//perbaikan
+                //menambahkan data ke intent
+                putExtra("EXTRA_SATU", teksSatu)//perbaikan
+                putExtra("EXTRA_DUA", teksDua)//perbaikan
+                putExtra("EXTRA_JUMLAH", jumlah)//perbaikan
+                putExtra("EXTRA_TOTAL", total)//perbaikan
             }
+            startActivity(intent)//perbaikan
         }
     }
+}
