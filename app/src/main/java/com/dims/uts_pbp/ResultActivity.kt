@@ -9,10 +9,10 @@ class ResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_result)
         val ringkasan = findViewById<TextView>(R.id.tvRingkasan)
         val totalView = findViewById<TextView>(R.id.tvTotal)
-        val satu = intent.getStringExtra("NAMA PESERTA")
-        val dua = intent.getStringExtra("NAMA EVENT")
-        val jumlah = intent.getIntExtra("JUMLAH", 0)
-        val total = intent.getIntExtra("TOTAL", 0)
+        val satu = intent.getStringExtra("NAMA PESERTA")//perbaikan
+        val dua = intent.getStringExtra("NAMA EVENT")//perbaikan
+        val jumlah = intent.getIntExtra("JUMLAH", 0)//perbaikan
+        val total = intent.getIntExtra("TOTAL", 0)//perbaikan
 // TODO-15: tampilkan String dan jumlah pada ringkasan
 // TODO-16: tampilkan total (konversi Int ke teks hanya di UI)
     }

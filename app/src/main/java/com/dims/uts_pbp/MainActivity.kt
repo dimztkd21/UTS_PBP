@@ -18,8 +18,9 @@ class MainActivity : AppCompatActivity() {
         tombol.setOnClickListener {
             val teksSatu = satu.text.toString().trim()
             val teksDua = dua.text.toString().trim()
-            val jumlah: Int? = /* TODO-01: konversi aman ke Int? */ null
-            if (teksSatu.isEmpty() || teksDua.isEmpty()) {
+            val jumlah: Int? = jumlahView.text.toString().trim().toIntOrNull()//perbaikan
+
+            if (teksSatu.isEmpty() || teksDua.isEmpty()) {//perbaikan
                 Toast.makeText(
                     this,
                     "Please fill in all fields",
@@ -27,12 +28,12 @@ class MainActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-            if (jumlah == null || jumlah !in 1..10) {
+            if (jumlah == null || jumlah !in 1..10) {//perbaikan
+                Toast.makeText(this, "Jumlah harus angka 1 sampai 10", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
-                // TODO-02: validasi kedua String tidak kosong; beri error dan hentikan proses
-                // TODO-03: validasi Int dalam rentang 1..10; beri error dan hentikan proses
                 val tarif: Int = 75000
-                val total: Int = 0 // FIXME-04: hitung dengan operasi perkalian Int
+                val total: Int = tarif * jumlah //perbaikan
                 // TODO-05: buat Explicit Intent menuju ResultActivity
                 // TODO-06: kirim teksSatu sebagai String
                 // TODO-07: kirim teksDua sebagai String
